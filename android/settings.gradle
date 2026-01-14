@@ -1,0 +1,6 @@
+rootProject.name = 'flutter_uvc_camera'
+
+// 本地模块已被 JitPack 远程依赖替代，无需再包含
+// include ':libausbc'
+// include ':libuvc'
+// include ':libnative'
