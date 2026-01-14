@@ -1,6 +1,23 @@
 group 'com.chenyeju295.flutter_uvc_camera'
 version '1.0-SNAPSHOT'
 
+// 把 jitpack 注入到根工程，确保无论谁引用我都能解析  解决Flutterflow不能修改顶层build.gradle的问题
+def injectRepo() {
+    def rootRepo = rootProject.buildscript.repositories
+    if (!rootRepo.find { it.url?.toString()?.contains('jitpack.io') }) {
+        rootRepo.maven { url 'https://jitpack.io' }
+    }
+    def allRepo = rootProject.allprojects.collectMany { it.repositories }
+    if (!allRepo.find { it.url?.toString()?.contains('jitpack.io') }) {
+        rootProject.allprojects {
+            repositories {
+                maven { url 'https://jitpack.io' }
+            }
+        }
+    }
+}
+injectRepo()
+
 
 buildscript {
     ext.kotlin_version = '1.9.24'
